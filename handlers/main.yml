@@ -1,0 +1,5 @@
+- name: Start and enable Plex service
+  service:
+    name: plexmediaserver
+    state: started
+    enabled: true

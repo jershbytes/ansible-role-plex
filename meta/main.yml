@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: plex
   author: Joshua Ross
-  description: Install Plex on Linux
+  description: Install plex on linux based servers.
 
   license: MIT
   min_ansible_version: "2.5"

@@ -3,9 +3,8 @@
 
 # list of hosts
 hosts = [
-  { :name => "plex-ubuntu-22", :box => "ubuntu/jammy64" },
-  { :name => "plex-ubuntu-24", :box => "ubuntu/noble64" },
-  { :name => "plex-el-10",  :box => "centos/7" }
+  { :name => "plex-ubuntu-24", :box => "bento/ubuntu-24.04" },
+  { :name => "plex-alma-9",    :box => "almalinux/9" },
 ]
 
 # configure Vagrant
@@ -18,6 +17,12 @@ Vagrant.configure("2") do |config|
       # general config
       instance.vm.box = host[:box]
       instance.vm.hostname = host[:name]
+
+      # libvirt provider specific settings
+      instance.vm.provider :libvirt do |libvirt|
+        libvirt.memory = 2048
+        libvirt.cpus = 2
+      end
 
       # ansible config
       instance.vm.provision "ansible" do |ansible|

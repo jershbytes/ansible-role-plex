@@ -1,6 +1,4 @@
 ---
-# tasks file for plex / EL based systems
-
 - name: Configure Plex repository
   ansible.builtin.yum_repository:
     name: PlexRepo

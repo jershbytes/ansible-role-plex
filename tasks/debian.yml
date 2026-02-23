@@ -1,6 +1,4 @@
 ---
-# tasks file for plex / ubuntu
-
 - name: Configure Plex repository
   ansible.builtin.apt_repository:
     repo: "{{ plex_repo_url }}"

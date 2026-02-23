@@ -1,8 +1,8 @@
 ---
 - name: Include APT tasks
-  ansible.builtin.include_tasks: ubuntu.yml
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_facts['pkg_mgr'] == 'apt'
 
 - name: Include DNF tasks
-  ansible.builtin.include_tasks: el.yml
+  ansible.builtin.include_tasks: redhat.yml
   when: ansible_facts['pkg_mgr'] == 'dnf'

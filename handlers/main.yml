@@ -1,5 +1,10 @@
-- name: Start and enable Plex service
-  service:
+- name: Start and enable plexmediaserver
+  ansible.builtin.systemd_service:
     name: plexmediaserver
     state: started
     enabled: true
+
+- name: Restart plexmediaserver
+  ansible.builtin.systemd_service:
+    name: plexmediaserver
+    state: restarted

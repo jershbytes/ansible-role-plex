@@ -1,11 +1,9 @@
 galaxy_info:
-  role_name: plex
-  author: Joshua Ross
+  role_name: plex_ansible
+  author: JershBytes
   description: Install plex on linux based servers.
-
   license: MIT
-  min_ansible_version: "2.5"
-
+  min_ansible_version: "2.9"
   platforms:
     - name: Ubuntu
       versions:
@@ -16,9 +14,7 @@ galaxy_info:
         - "8"
         - "9"
         - "10"
-
-
   galaxy_tags:
     - plex
-
-dependencies: []
+    - mediaserver
+    - linux

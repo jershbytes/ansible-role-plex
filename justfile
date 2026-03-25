@@ -4,9 +4,10 @@ default:
 
 # Setup pre-commit
 setup:
-    pre-commit install
+    uv sync
+    uv run pre-commit install
     @echo "Pre-commit hooks installed successfully"
 
 # Lint the repo
 lint:
-    pre-commit run --all-files
+    uv run pre-commit run --all-files

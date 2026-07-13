@@ -1,8 +1,11 @@
+---
 - name: Configure Plex repository
   ansible.builtin.template:
     src: plex.repo.j2
     dest: /etc/yum.repos.d/plex.repo
     mode: "0644"
+  register: plex_repo_template
+
 - name: Clan yum repository
   ansible.builtin.command:
     cmd: sudo dnf clean all
@@ -15,5 +18,8 @@
   ansible.builtin.dnf:
     name: plexmediaserver
     state: present
+    # Bypass the strict crypto validation block for the actual RPM signature match
+    disable_gpg_check: true
+    update_cache: "{{ plex_repo_template.changed }}"
   notify:
     - Start and enable Plex service

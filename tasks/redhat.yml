@@ -23,4 +23,4 @@
     update_cache: "{{ plex_repo_template.changed }}"
   notify:
     - Reload systemd
-    - Start and enable Plex service
+    - Start and enable plexmediaserver

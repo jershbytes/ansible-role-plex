@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  role_name: ansible_role_plex
+  namespace: jershbytes
+  role_name: plex
   author: jershbytes
   description: Install plex on linux based servers.
   license: MIT

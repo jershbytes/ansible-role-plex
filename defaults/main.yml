@@ -2,7 +2,3 @@
 # defaults file for plex
 plex_repo: true
 plex_repo_key: "https://downloads.plex.tv/plex-keys/PlexSign.v2.key"
-_plex_repo_urls:
-  Debian: "deb https://downloads.plex.tv/repo/deb public main"
-  RedHat: "https://downloads.plex.tv/repo/rpm/$basearch/"
-plex_repo_url: "{{ _plex_repo_urls[ansible_facts['os_family']] }}"

@@ -23,11 +23,5 @@
     state: present
     update_cache: true
   notify:
+    - Reload systemd
     - Start and enable plexmediaserver
-
-- name: Add ufw plex rule
-  community.general.ufw:
-    rule: allow
-    port: "32400"
-    proto: "tcp"
-    state: enabled

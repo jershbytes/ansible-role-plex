@@ -16,12 +16,19 @@
     repo: "{{ debian_plex_repo_url }}"
     filename: plex
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install Plex Server
   ansible.builtin.apt:
     name: plexmediaserver
     state: present
-    update_cache: no
+    update_cache: false
   notify:
     - Start and enable Plex service
+
+- name: Add ufw plex rule
+  community.general.ufw:
+    rule: allow
+    port: "32400"
+    proto: "tcp"
+    state: enabled

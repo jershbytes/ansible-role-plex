@@ -8,17 +8,3 @@
     name: plexmediaserver
     state: started
     enabled: true
-
-- name: Restart plexmediaserver
-  ansible.builtin.systemd_service:
-    name: plexmediaserver
-    state: restarted
-
-- name: Add firewalld rule
-  ansible.posix.firewalld:
-    port: 32400/tcp
-    zone: public
-    state: enabled
-    permanent: true
-    immediate: true
-  when: ansible_facts['os_family'] == "RedHat"

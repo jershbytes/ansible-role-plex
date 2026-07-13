@@ -2,3 +2,4 @@
 # defaults file for plex
 plex_repo: true
 plex_repo_key: "https://downloads.plex.tv/plex-keys/PlexSign.v2.key"
+debian_plex_repo_url: "https://repo.plex.tv/deb/ public main"

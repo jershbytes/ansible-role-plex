@@ -7,7 +7,7 @@
 
 - name: Configure Plex repository
   ansible.builtin.apt_repository:
-    repo: "{{ plex_repo_url }}"
+    repo: "{{ debian_plex_repo_url }}"
     state: present
     update_cache: false
   register: status_plex_repo

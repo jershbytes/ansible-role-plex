@@ -6,22 +6,19 @@
     mode: "0644"
   register: plex_repo_template
 
-- name: Clan yum repository
-  ansible.builtin.command:
-    cmd: sudo dnf clean all
-
-- name: Refresh cache
-  ansible.builtin.command:
-    cmd: sudo dnf makecache -y
-
 - name: Install Plex Server
   ansible.builtin.dnf:
     name: plexmediaserver
     state: present
     # Bypass the strict crypto validation block for the actual RPM signature match
-    disable_gpg_check: true
-    update_cache: "{{ plex_repo_template.changed }}"
+    update_cache: true
   notify:
     - Reload systemd
     - Start and enable plexmediaserver
-    - Add firewalld rule
+
+- name: Add firewalld rule
+  ansible.posix.firewalld:
+    service: plex
+    permanent: true
+    immediate: true
+    state: enabled

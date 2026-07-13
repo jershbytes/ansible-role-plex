@@ -1,15 +1,15 @@
 ---
+- name: Add Plex repository key
+  ansible.builtin.apt_key:
+    url: "{{ plex_repo_key }}"
+    state: present
+  register: status_plex_repo
+
 - name: Configure Plex repository
   ansible.builtin.apt_repository:
     repo: "{{ plex_repo_url }}"
     state: present
     update_cache: false
-  register: status_plex_repo
-
-- name: Add Plex repository key
-  ansible.builtin.apt_key:
-    url: "{{ plex_repo_key }}"
-    state: present
   register: status_plex_repo
 
 - name: Install Plex Server

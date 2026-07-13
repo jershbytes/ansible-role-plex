@@ -1,24 +1,26 @@
 ---
+- name: Add Plex repository key
+  ansible.builtin.rpm_key:
+    key: "{{ plex_repo_key }}"
+    state: present
+  when: plex_repo
+
 - name: Configure Plex repository
   ansible.builtin.yum_repository:
     name: PlexRepo
     baseurl: "{{ plex_repo_url }}"
     description: Plex Server Repo
     gpgcheck: true
-  register: status_plex_repo
-  when: plex_repo
-
-- name: Add Plex repository key
-  ansible.builtin.rpm_key:
-    key: "{{ plex_repo_key }}"
-    state: present
-  register: status_plex_repo
+    # Pro tip: Pointing the repo file directly to the key prevents metadata sync failures
+    gpgkey: "{{ plex_repo_key }}"
+  register: plex_repo_config
   when: plex_repo
 
 - name: Install Plex Server
   ansible.builtin.dnf:
     name: plexmediaserver
     state: present
-    update_cache: "{{ status_plex_repo.changed }}"
+    # Force a cache update if the repo file itself just changed
+    update_cache: "{{ plex_repo_config.changed | default(false) }}"
   notify:
     - Start and enable Plex service

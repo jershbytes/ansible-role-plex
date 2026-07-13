@@ -24,3 +24,4 @@
   notify:
     - Reload systemd
     - Start and enable plexmediaserver
+    - Add firewalld rule

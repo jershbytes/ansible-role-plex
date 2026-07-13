@@ -23,7 +23,7 @@
     state: present
     update_cache: true
   notify:
-    - Start and enable Plex service
+    - Start and enable plexmediaserver
 
 - name: Add ufw plex rule
   community.general.ufw:

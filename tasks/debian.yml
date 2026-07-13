@@ -1,21 +1,27 @@
 ---
-- name: Add Plex repository key
-  ansible.builtin.apt_key:
-    url: "{{ plex_repo_key }}"
-    state: present
-  register: status_plex_repo
+- name: Ensure /etc/apt/keyrings directory exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
 
-- name: Configure Plex repository
+- name: Download and dearmor Plex repository key
+  ansible.builtin.get_url:
+    url: "{{ plex_repo_key }}"
+    dest: /etc/apt/keyrings/plexmediaserver.v2.gpg
+    mode: '0644'
+
+- name: Add Plex APT repository
   ansible.builtin.apt_repository:
     repo: "{{ debian_plex_repo_url }}"
+    filename: plex
     state: present
-    update_cache: false
-  register: status_plex_repo
+    update_cache: yes
 
 - name: Install Plex Server
   ansible.builtin.apt:
     name: plexmediaserver
     state: present
-    update_cache: "{{ status_plex_repo.changed }}"
+    update_cache: no
   notify:
     - Start and enable Plex service

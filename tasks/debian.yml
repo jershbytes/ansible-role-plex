@@ -11,18 +11,17 @@
     dest: /etc/apt/keyrings/plexmediaserver.v2.gpg
     mode: '0644'
 
-- name: Add Plex APT repository
-  ansible.builtin.apt_repository:
-    repo: "{{ debian_plex_repo_url }}"
-    filename: plex
-    state: present
-    update_cache: true
+- name: Add Plex APT repository list file
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/plex.list
+    content: "{{ debian_plex_repo_url }}\n"
+    mode: '0644'
 
 - name: Install Plex Server
   ansible.builtin.apt:
     name: plexmediaserver
     state: present
-    update_cache: false
+    update_cache: true
   notify:
     - Start and enable Plex service
 
